@@ -18,7 +18,8 @@ class SDListTile implements BaseJsonWidget {
 
   String replace(String key) {
     final itemData = args['item_data'];
-    String text = args[key];
+    final String text0 = args[key]?.toString() ?? '';
+    String text = text0;
     if (text.startsWith('\$') && itemData is Map) {
       text = itemData[text] ?? "";
     }

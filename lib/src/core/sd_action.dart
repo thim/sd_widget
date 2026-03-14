@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sd_widget/src/core/sd_event.dart';
 
 /// Enum representing different types of actions that can be performed in the widget system.
@@ -83,7 +85,8 @@ class SDAction {
       final data = args["data"];
       final label = args["label"]?.toString();
       return SDAction(type, reference, event: event, data: data, label: label);
-    } catch (e) {
+    } catch (e, s) {
+      log('Error parsing SDAction', error: e, stackTrace: s, name: 'SD_ACTION');
       return null;
     }
   }

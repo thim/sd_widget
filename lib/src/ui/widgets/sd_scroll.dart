@@ -21,7 +21,6 @@ class SDScroll implements BaseJsonWidget {
 
     return SingleChildScrollView(
         padding: decodeEdgeInsetsGeometry(args["padding"]),
-        controller: ScrollController(),
         scrollDirection: axis,
         child: axis == Axis.horizontal
             ? Row(

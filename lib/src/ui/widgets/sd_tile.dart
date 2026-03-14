@@ -17,7 +17,8 @@ class SDTile implements BaseJsonWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = args['img'];
+    final image = args['img']?.toString();
+    if (image == null) return const SizedBox.shrink();
     final svg = base64Decode(image.replaceAll(_base64Image, ""));
 
     return Container(
@@ -37,12 +38,12 @@ class SDTile implements BaseJsonWidget {
         ),
         leading: SvgPicture.memory(svg, fit: BoxFit.contain, height: 72.0),
         title: Text(
-          args["title"],
+          args["title"]?.toString() ?? '',
           overflow: TextOverflow.ellipsis,
           maxLines: 3,
         ),
         subtitle: Text(
-          args["subtitle"],
+          args["subtitle"]?.toString() ?? '',
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),

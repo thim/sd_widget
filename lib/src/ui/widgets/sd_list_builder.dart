@@ -21,7 +21,8 @@ class SDListBuilder implements BaseJsonWidget {
         if (builder is Map) {
           builder['item_data'] = listBuilder.builder(args["id"], index);
         }
-        final viewBuilder = viewData.createBuilder(builder) as BaseJsonWidget;
+        final viewBuilder = viewData.createBuilder(builder);
+        if (viewBuilder is! BaseJsonWidget) return const SizedBox.shrink();
         return viewBuilder.build(context);
       },
     );

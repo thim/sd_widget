@@ -75,7 +75,6 @@ class JsonViewRegistry {
   ///
   /// [key] - The widget type name
   /// [builder] - The builder function for creating widgets of this type
-  /// Returns true if the builder was added, false if it already existed
   void add(String key, RegistryBuilder builder) {
     if (_builders.containsKey(key)) log('Builder $key already registered.', name: 'VIEW_REGISTRY', level: 1);
     _builders.putIfAbsent(key, () => builder);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 /// Represents an event associated with an action.
 ///
 /// Events provide additional context and metadata for actions,
@@ -26,7 +28,8 @@ class SDEvent {
       if (name == null) return null;
 
       return SDEvent(name, metadata);
-    } catch (e) {
+    } catch (e, s) {
+      log('Error parsing SDEvent', error: e, stackTrace: s, name: 'SD_EVENT');
       return null;
     }
   }

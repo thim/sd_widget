@@ -17,6 +17,7 @@ class SDExpanded implements BaseJsonWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: args['flex'] as int? ?? 1,
       child: data.build(context),
     );
   }

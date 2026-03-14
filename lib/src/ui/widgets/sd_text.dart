@@ -12,7 +12,9 @@ class SDText implements BaseJsonWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final itemData = args['item_data'];
-    String text = args['text'];
+    final text0 = args['text']?.toString();
+    if (text0 == null) return const SizedBox.shrink();
+    String text = text0;
 
     if (text.startsWith('\$') && itemData is Map) {
       text = itemData[text] ?? "";

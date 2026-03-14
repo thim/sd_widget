@@ -75,7 +75,7 @@ EdgeInsetsGeometry? decodeEdgeInsetsGeometry(dynamic value) {
     if (value is String || value is double || value is int) {
       result = EdgeInsets.all(parseDouble(value)!);
     } else if (value is List) {
-      assert(value.length == 2 || value.length == 4);
+      if (value.length != 2 && value.length != 4) return null;
       // LR,TB
       if (value.length == 2) {
         result = EdgeInsets.symmetric(
@@ -124,7 +124,7 @@ Color? decodeColor(dynamic value) {
     }
 
     if (value?.length == 6 || value?.length == 8) {
-      i = int.parse(value, radix: 16);
+      i = int.tryParse(value, radix: 16) ?? 0;
 
       if (value?.length != 8) {
         i = 0xff000000 + i;
