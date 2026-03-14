@@ -40,10 +40,14 @@ class JsonViewData {
   void loadZip(
     String jsonString,
   ) {
-    final List<int> original = utf8.encode(jsonString);
-    final List<int> decompress = gzip.decode(original);
-    final String decoded = utf8.decode(decompress);
-    loadJson(decoded);
+    try {
+      final List<int> original = utf8.encode(jsonString);
+      final List<int> decompress = gzip.decode(original);
+      final String decoded = utf8.decode(decompress);
+      loadJson(decoded);
+    } catch (e, s) {
+      log('Error decompressing data', error: e, stackTrace: s, name: 'VIEW_DATA');
+    }
   }
 
   /// Loads JSON data from a string and converts it to widget views.

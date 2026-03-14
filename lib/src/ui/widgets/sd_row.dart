@@ -11,7 +11,7 @@ class SDRow implements BaseJsonWidget {
   SDRow(this.args, JsonViewRegistry registry) : data = JsonViewDataBuilder(registry) {
     final children = args['children'];
     if (children is Iterable) {
-      data.fromList(children);
+      data.fromList(children, itemData: (args['item_data'] as Map?)?.cast<String, dynamic>() ?? {});
     }
   }
 

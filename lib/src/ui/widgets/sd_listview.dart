@@ -12,7 +12,7 @@ class SDListView implements BaseJsonWidget {
     final children = args['children'];
 
     if (children is Iterable) {
-      data.fromList(children);
+      data.fromList(children, itemData: (args['item_data'] as Map?)?.cast<String, dynamic>() ?? {});
     }
   }
 

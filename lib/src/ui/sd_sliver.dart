@@ -47,6 +47,6 @@ class SDSliverDelegate extends SliverChildDelegate {
     if (identical(_widgetData, oldDelegate._widgetData)) {
       return false;
     }
-    return _widgetData.length != oldDelegate._widgetData.length || _widgetData.builders != oldDelegate._widgetData.builders;
+    return _widgetData.length != oldDelegate._widgetData.length;
   }
 }

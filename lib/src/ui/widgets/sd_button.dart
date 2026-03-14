@@ -25,13 +25,13 @@ class SDButton implements BaseJsonWidget {
 
     switch (style) {
       case ButtonStyle.elevated:
-        return ElevatedButton(onPressed: click, child: Text('${args['text']}'));
+        return ElevatedButton(onPressed: click, child: Text(args['text']?.toString() ?? ''));
       case ButtonStyle.filled:
-        return FilledButton(onPressed: click, child: Text('${args['text']}'));
+        return FilledButton(onPressed: click, child: Text(args['text']?.toString() ?? ''));
       case ButtonStyle.outline:
-        return OutlinedButton(onPressed: click, child: Text('${args['text']}'));
+        return OutlinedButton(onPressed: click, child: Text(args['text']?.toString() ?? ''));
       case ButtonStyle.text:
-        return TextButton(onPressed: click, child: Text('${args['text']}'));
+        return TextButton(onPressed: click, child: Text(args['text']?.toString() ?? ''));
     }
   }
 }
