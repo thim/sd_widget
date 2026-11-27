@@ -1,8 +1,11 @@
+export 'package:sd_widget/src/cache/sd_layout_repository.dart';
+export 'package:sd_widget/src/cache/sd_layout_store.dart';
 export 'package:sd_widget/src/core/sd_action.dart';
 export 'package:sd_widget/src/core/sd_event.dart';
 export 'package:sd_widget/src/core/sd_registry.dart';
 export 'package:sd_widget/src/ui/default_registry.dart';
 export 'package:sd_widget/src/ui/sd_data_builder.dart';
+export 'package:sd_widget/src/ui/sd_layout_view.dart';
 export 'package:sd_widget/src/ui/sd_sliver.dart';
 export 'package:sd_widget/src/ui/sd_widget.dart';
 export 'package:sd_widget/src/ui/widgets/decoder.dart';
