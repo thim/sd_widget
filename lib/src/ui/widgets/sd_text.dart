@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sd_widget/src/ui/sd_data_builder.dart';
 import 'package:sd_widget/src/ui/widgets/decoder.dart';
+import 'package:sd_widget/src/ui/widgets/parser.dart';
+import 'package:sd_widget/src/ui/widgets/sd_common.dart';
 
 class SDText implements BaseJsonWidget {
   final Map args;
@@ -18,13 +20,19 @@ class SDText implements BaseJsonWidget {
       text = itemData[text] ?? "";
     }
 
+    final base = decodeTextStyle(textTheme, args['style']) ?? const TextStyle();
+
     return Text(
       text,
-      style: decodeTextStyle(
-        textTheme,
-        args['style'],
-      )?.copyWith(
+      textAlign: decodeTextAlign(args['textAlign']),
+      maxLines: parseInt(args['maxLines']),
+      overflow: decodeTextOverflow(args['overflow']),
+      style: base.copyWith(
         color: decodeColor(args['color']),
+        fontSize: parseDouble(args['fontSize']),
+        fontWeight: decodeFontWeight(args['fontWeight']),
+        fontFamily: args['fontFamily'] as String?,
+        height: parseDouble(args['height']),
       ),
     );
   }

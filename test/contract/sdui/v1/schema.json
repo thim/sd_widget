@@ -149,13 +149,13 @@
         "text": { "type": "string", "description": "Começando com $, é lido de item_data (listas)." },
         "style": { "enum": ["headlineLarge", "headlineMedium", "headlineSmall", "titleLarge", "titleMedium", "titleSmall", "bodyLarge", "bodyMedium", "bodySmall", "labelLarge", "labelMedium", "labelSmall"] },
         "color": { "$ref": "#/$defs/color" },
-        "fontSize": { "type": "number", "exclusiveMinimum": 0, "x-status": "planned" },
-        "fontWeight": { "enum": [100, 200, 300, 400, 500, 600, 700, 800, 900], "x-status": "planned" },
-        "fontFamily": { "type": "string", "x-status": "planned" },
-        "textAlign": { "enum": ["left", "center", "right", "justify", "start", "end"], "x-status": "planned" },
-        "height": { "type": "number", "exclusiveMinimum": 0, "description": "Altura da linha como múltiplo do tamanho (1.2 = 120%).", "x-status": "planned" },
-        "maxLines": { "type": "integer", "minimum": 1, "x-status": "planned" },
-        "overflow": { "enum": ["clip", "ellipsis", "fade", "visible"], "x-status": "planned" },
+        "fontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "fontWeight": { "enum": [100, 200, 300, 400, 500, 600, 700, 800, 900] },
+        "fontFamily": { "type": "string" },
+        "textAlign": { "enum": ["left", "center", "right", "justify", "start", "end"] },
+        "height": { "type": "number", "exclusiveMinimum": 0, "description": "Altura da linha como múltiplo do tamanho (1.2 = 120%)." },
+        "maxLines": { "type": "integer", "minimum": 1 },
+        "overflow": { "enum": ["clip", "ellipsis", "fade", "visible"] },
         "item_data": { "$ref": "#/$defs/item_data" }
       },
       "additionalProperties": false
@@ -201,7 +201,7 @@
         "mainAxisAlignment": { "enum": ["start", "center", "end", "spaceBetween", "spaceAround", "spaceEvenly"] },
         "mainAxisSize": { "enum": ["min", "max"] },
         "verticalDirection": { "enum": ["down", "up"] },
-        "spacing": { "type": "number", "minimum": 0, "description": "Espaço entre filhos (gap do auto-layout).", "x-status": "planned" },
+        "spacing": { "type": "number", "minimum": 0, "description": "Espaço entre filhos (gap do auto-layout)." },
         "item_data": { "$ref": "#/$defs/item_data" }
       },
       "additionalProperties": false
@@ -234,7 +234,7 @@
       "properties": {
         "width": { "$ref": "#/$defs/length" },
         "height": { "$ref": "#/$defs/length" },
-        "child": { "$ref": "#/$defs/node", "x-status": "planned" },
+        "child": { "$ref": "#/$defs/node" },
         "item_data": { "$ref": "#/$defs/item_data" }
       },
       "additionalProperties": false
@@ -244,15 +244,15 @@
       "properties": {
         "color": { "$ref": "#/$defs/color" },
         "radius": {
-          "description": "Raio único, ou [topo-esq, topo-dir, base-dir, base-esq] (planejado).",
+          "description": "Raio único, ou [topo-esq, topo-dir, base-dir, base-esq].",
           "oneOf": [
             { "type": "number", "minimum": 0 },
-            { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 4, "maxItems": 4, "x-status": "planned" }
+            { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 4, "maxItems": 4 }
           ]
         },
         "borderColor": { "$ref": "#/$defs/color" },
-        "width": { "type": "number", "minimum": 0, "description": "Espessura da borda. Sem borderColor e sem width, não há borda (planejado: hoje o sd_widget sempre desenha uma borda preta de 1)." },
-        "shape": { "enum": ["rectangle", "circle"], "x-status": "planned" }
+        "width": { "type": "number", "minimum": 0, "description": "Espessura da borda. Sem borderColor e sem width, não há borda." },
+        "shape": { "enum": ["rectangle", "circle"] }
       },
       "additionalProperties": false
     },
@@ -266,7 +266,7 @@
         "color": { "$ref": "#/$defs/color", "description": "Ignorado quando há decoration (use decoration.color)." },
         "decoration": { "$ref": "#/$defs/decoration" },
         "alignment": { "$ref": "#/$defs/alignment" },
-        "clip": { "type": "boolean", "description": "Recorta o filho na forma da decoração (frame com 'recortar conteúdo').", "x-status": "planned" },
+        "clip": { "type": "boolean", "description": "Recorta o filho na forma da decoração (frame com 'recortar conteúdo')." },
         "child": { "$ref": "#/$defs/node" },
         "item_data": { "$ref": "#/$defs/item_data" }
       },
@@ -277,7 +277,7 @@
       "required": ["child"],
       "properties": {
         "child": { "$ref": "#/$defs/node" },
-        "flex": { "type": "integer", "minimum": 1, "x-status": "planned" },
+        "flex": { "type": "integer", "minimum": 1 },
         "item_data": { "$ref": "#/$defs/item_data" }
       },
       "additionalProperties": false
@@ -319,7 +319,6 @@
     },
 
     "stack": {
-      "x-status": "planned",
       "description": "Frame sem auto-layout: filhos posicionados livremente (use positioned).",
       "type": "object",
       "properties": {
@@ -333,7 +332,6 @@
       "additionalProperties": false
     },
     "positioned": {
-      "x-status": "planned",
       "description": "Só dentro de stack. Dois lados de um eixo + tamanho ausente = estica.",
       "type": "object",
       "required": ["child"],
@@ -350,7 +348,6 @@
       "additionalProperties": false
     },
     "image": {
-      "x-status": "planned",
       "description": "Imagem raster (PNG/JPEG/GIF/WebP) por URL.",
       "type": "object",
       "required": ["url"],
@@ -366,7 +363,6 @@
       "additionalProperties": false
     },
     "opacity": {
-      "x-status": "planned",
       "type": "object",
       "required": ["opacity", "child"],
       "properties": {
@@ -377,7 +373,6 @@
       "additionalProperties": false
     },
     "rotate": {
-      "x-status": "planned",
       "description": "Gira o filho em torno do centro (ou de alignment). Positivo = horário, como no kanvas.",
       "type": "object",
       "required": ["angle", "child"],
@@ -390,7 +385,6 @@
       "additionalProperties": false
     },
     "tap": {
-      "x-status": "planned",
       "description": "Torna qualquer nó clicável sem mudar o visual (diferente de button, que usa o visual Material).",
       "type": "object",
       "required": ["action", "child"],

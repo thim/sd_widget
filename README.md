@@ -174,6 +174,12 @@ SD Widget comes with a comprehensive set of pre-built widgets:
 | `SDListTile` | List item | `list_tile` |
 | `SDTile` | Custom tile | `tile` |
 | `SDListBuilder` | Dynamic list | `list_builder` |
+| `SDStack` | Free positioning (children use `positioned`) | `stack` |
+| `SDPositioned` | Absolute position inside `stack` | `positioned` |
+| `SDImage` | Network image (PNG/JPEG/GIF/WebP) | `image` |
+| `SDOpacity` | Opacity around a child | `opacity` |
+| `SDRotate` | Rotation in degrees, clockwise | `rotate` |
+| `SDTap` | Makes any node tappable (fires an action) | `tap` |
 | **Scrolling** | | |
 | `SDScroll` | Scrollable content | `scroll` |
 
@@ -268,6 +274,13 @@ O formato JSON aceito é descrito pelo contrato SDUI v1, mantido no [kanvas](htt
 - `flutter test test/contract_test.dart` renderiza cada exemplo do contrato.
 - Exemplos marcados como `planned` dependem de recursos ainda não implementados e ficam pulados.
 - Para atualizar a cópia: `tool/sync_contract.sh <ref-do-kanvas>`.
+
+Também do contrato v1:
+
+- `text`: `fontSize`, `fontWeight` (100–900), `fontFamily`, `textAlign`, `height`, `maxLines`, `overflow`.
+- `column`/`row`: `spacing`. `expanded`: `flex`. `sized_box`: `child`.
+- `container`: `clip`. `decoration`: `shape: circle`, `radius` por canto `[te, td, bd, be]`.
+- **Mudança:** `decoration` só desenha borda quando há `borderColor` ou `width` (antes era sempre preta de 1 px).
 
 ## 🎬 Action Types
 

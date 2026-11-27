@@ -137,19 +137,59 @@ Color? decodeColor(dynamic value) {
 }
 
 BoxDecoration? decodeDecoration(dynamic value) {
-  BoxDecoration? result;
+  if (value is! Map) return null;
 
-  if (value is Map) {
-    result = BoxDecoration(
-      color: decodeColor(value['color']),
-      borderRadius: BorderRadius.all(Radius.circular(parseDouble(value['radius']) ?? 0.0)),
-      border: Border.all(
-        color: decodeColor(value['borderColor']) ?? const Color(0xFF000000),
-        width: parseDouble(value['width']) ?? 1.0,
-      ),
-    );
+  final circle = value['shape'] == 'circle';
+  final borderColor = decodeColor(value['borderColor']);
+  final borderWidth = parseDouble(value['width']);
+
+  // Só há borda quando borderColor ou width é informado.
+  final border = borderColor == null && borderWidth == null
+      ? null
+      : Border.all(color: borderColor ?? const Color(0xFF000000), width: borderWidth ?? 1.0);
+
+  return BoxDecoration(
+    color: decodeColor(value['color']),
+    shape: circle ? BoxShape.circle : BoxShape.rectangle,
+    borderRadius: circle ? null : decodeBorderRadius(value['radius']),
+    border: border,
+  );
+}
+
+/// Raio único ou [topo-esq, topo-dir, base-dir, base-esq].
+BorderRadius? decodeBorderRadius(dynamic value) {
+  if (value is List && value.length == 4) {
+    Radius r(int i) => Radius.circular(parseDouble(value[i], 0.0)!);
+    return BorderRadius.only(topLeft: r(0), topRight: r(1), bottomRight: r(2), bottomLeft: r(3));
   }
-  return result;
+  final r = parseDouble(value);
+  return r == null || r == 0 ? null : BorderRadius.circular(r);
+}
+
+FontWeight? decodeFontWeight(dynamic value) {
+  final w = value is num ? value.toInt() : int.tryParse('$value');
+  if (w == null || w < 100 || w > 900 || w % 100 != 0) return null;
+  return FontWeight.values[w ~/ 100 - 1];
+}
+
+TextAlign? decodeTextAlign(dynamic value) {
+  return {
+    'left': TextAlign.left,
+    'center': TextAlign.center,
+    'right': TextAlign.right,
+    'justify': TextAlign.justify,
+    'start': TextAlign.start,
+    'end': TextAlign.end,
+  }[value];
+}
+
+TextOverflow? decodeTextOverflow(dynamic value) {
+  return {
+    'clip': TextOverflow.clip,
+    'ellipsis': TextOverflow.ellipsis,
+    'fade': TextOverflow.fade,
+    'visible': TextOverflow.visible,
+  }[value];
 }
 
 TextStyle? decodeTextStyle(TextTheme theme, dynamic value) {
