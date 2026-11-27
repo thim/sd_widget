@@ -50,25 +50,34 @@ pulado nos testes do sd_widget; ao implementar, remova a marca e regenere o mani
 Comportamento de `decoration`: sem `borderColor` e sem `width` não há borda (antes da
 fase 1 o sd_widget sempre desenhava uma borda preta de 1 px).
 
-## Como o kanvas vai mapear (fase 2)
+## Como o kanvas mapeia
+
+Implementado em `kanvas_sdui::export` (fase 2). A fixture `20-exportado-do-kanvas.json` é gerada pelo
+exportador a partir de uma tela montada com o modelo do kanvas
+(`cargo run -p kanvas-sdui --example export_demo`) e um teste garante que ela não fica
+desatualizada.
 
 | kanvas | SDUI |
 |---|---|
 | Frame com auto-layout coluna/linha | `container` (tamanho, fundo, raio, borda, padding, `clip`) + `column`/`row` com `spacing`, alinhamentos e `mainAxisSize` (*Abraçar* → `min`) |
-| Frame sem auto-layout | `container` + `stack`, filhos em `positioned` (aviso: não se adapta a telas de outros tamanhos) |
+| Frame raiz | `container` com `"infinity"` nos dois eixos (ocupa a tela); `RootSize::Fixed` mantém o tamanho do kanvas |
+| Frame sem auto-layout | `container` + `stack`, filhos em `positioned` (não se adapta a telas de outros tamanhos) |
+| Grupo | achatado: os filhos entram direto no `stack` do frame; dentro de auto-layout vira um `stack` do tamanho dos filhos |
 | Filho *Preencher* no eixo principal | `expanded` |
 | Filho *Preencher* no eixo cruzado | `crossAxisAlignment: stretch` no pai, ou `sized_box` com `"infinity"` |
-| Retângulo / elipse | `container` com `decoration` (`shape: circle` na elipse) |
-| Texto | `text` com estilo explícito (fonte, tamanho, peso, alinhamento, altura de linha) |
+| Retângulo / elipse | `container` com `decoration` (`shape: circle` na elipse circular); elipse não circular vira `svg` |
+| Texto | `text` com estilo explícito (fonte, tamanho, peso arredondado para centena, alinhamento, altura de linha, cor; preto sem preenchimento); `sized_box` quando o tamanho é fixo |
 | Imagem | `image` com a URL pública do asset |
-| Path | `svg` gerado pelo crate `kanvas-svg` |
+| Path | `svg` com o SVG em texto (preenchimento e borda) |
 | Opacidade < 1 / rotação ≠ 0 | `opacity` / `rotate` em volta do nó |
-| Item com ação (painel *Exportar*) | `tap` em volta do nó, ou `button` se o papel for "botão nativo" |
+| Item com ação (painel *Exportar*) | ainda não: entra junto com o painel no editor |
 | Instância de componente | v1: conteúdo copiado no lugar; templates com `ref` ficam para depois |
 | Oculto | não exportado |
 
-O que não tiver equivalente (gradiente, várias camadas de preenchimento, borda
-interna/externa…) vira um aviso em `meta.warnings`, nunca um JSON inválido.
+O que não tiver equivalente vira aviso em `meta.warnings`, nunca um JSON inválido:
+várias camadas de preenchimento (vai a de cima), várias bordas (vai a primeira), borda
+central/externa (vira interna), rotação dentro de auto-layout (gira, mas não muda o espaço
+ocupado), borda em texto, preenchimento em imagem.
 
 ## Evoluindo o contrato
 

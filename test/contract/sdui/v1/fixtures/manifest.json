@@ -115,6 +115,26 @@
         "sized_box",
         "text"
       ]
+    },
+    {
+      "file": "20-exportado-do-kanvas.json",
+      "requires": [],
+      "status": "current",
+      "title": "Tela exportada do kanvas (gerada por export_demo)",
+      "types": [
+        "column",
+        "container",
+        "expanded",
+        "image",
+        "opacity",
+        "positioned",
+        "rotate",
+        "row",
+        "sized_box",
+        "stack",
+        "svg",
+        "text"
+      ]
     }
   ],
   "version": 1
