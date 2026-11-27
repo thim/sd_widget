@@ -330,7 +330,7 @@
               "fit": "cover",
               "height": 140,
               "semanticLabel": "Foto",
-              "url": "https://kanvas.example.com/files/demo/assets/foto.jpg",
+              "url": "https://kanvas.example.com/api/assets/foto.jpg",
               "width": "infinity"
             },
             "type": "image"
