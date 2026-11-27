@@ -71,6 +71,9 @@ class JsonViewRegistry {
     return _builders[type]?.call(args);
   }
 
+  /// Whether a builder is registered for [type].
+  bool supports(String type) => _builders.containsKey(type);
+
   /// Adds a new widget builder to the registry.
   ///
   /// [key] - The widget type name

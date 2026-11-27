@@ -1,0 +1,405 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thim/kanvas/contracts/sdui/v1/schema.json",
+  "title": "SDUI v1 (kanvas → sd_widget)",
+  "description": "Formato de tela trocado entre o kanvas (exporta) e o sd_widget (renderiza). Cada nó é {type, data}. Tipos e propriedades marcados com x-status=planned ainda não existem no sd_widget (fase 1); os demais já são suportados.",
+  "oneOf": [
+    { "$ref": "#/$defs/root" },
+    { "type": "array", "items": { "$ref": "#/$defs/node" }, "minItems": 1 }
+  ],
+  "$defs": {
+    "root": {
+      "description": "Raiz de uma tela exportada: um nó com metadados opcionais. O sd_widget ignora chaves além de type/data.",
+      "type": "object",
+      "required": ["type", "data"],
+      "properties": {
+        "sdui": { "const": 1, "description": "Versão do contrato." },
+        "meta": { "$ref": "#/$defs/meta" },
+        "type": true,
+        "data": true
+      },
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/$defs/node_body" }]
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "source": { "const": "kanvas" },
+        "file": { "type": "string", "description": "Id do arquivo no kanvas." },
+        "frame": { "type": "string", "description": "Id do frame exportado." },
+        "name": { "type": "string" },
+        "exportedAt": { "type": "string", "format": "date-time" },
+        "warnings": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "required": ["type", "data"],
+      "properties": { "type": true, "data": true },
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/$defs/node_body" }]
+    },
+    "node_body": {
+      "properties": {
+        "type": {
+          "enum": [
+            "text", "button", "svg", "padding", "column", "row", "scroll", "listview",
+            "sized_box", "container", "expanded", "tile", "list_tile", "list_builder",
+            "stack", "positioned", "image", "opacity", "rotate", "tap"
+          ]
+        },
+        "data": { "type": "object" }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "text" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/text" } } } },
+        { "if": { "properties": { "type": { "const": "button" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/button" } } } },
+        { "if": { "properties": { "type": { "const": "svg" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/svg" } } } },
+        { "if": { "properties": { "type": { "const": "padding" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/padding" } } } },
+        { "if": { "properties": { "type": { "const": "column" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/flex" } } } },
+        { "if": { "properties": { "type": { "const": "row" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/flex" } } } },
+        { "if": { "properties": { "type": { "const": "scroll" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/scroll" } } } },
+        { "if": { "properties": { "type": { "const": "listview" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/listview" } } } },
+        { "if": { "properties": { "type": { "const": "sized_box" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/sized_box" } } } },
+        { "if": { "properties": { "type": { "const": "container" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/container" } } } },
+        { "if": { "properties": { "type": { "const": "expanded" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/expanded" } } } },
+        { "if": { "properties": { "type": { "const": "tile" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/tile" } } } },
+        { "if": { "properties": { "type": { "const": "list_tile" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/list_tile" } } } },
+        { "if": { "properties": { "type": { "const": "list_builder" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/list_builder" } } } },
+        { "if": { "properties": { "type": { "const": "stack" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/stack" } } } },
+        { "if": { "properties": { "type": { "const": "positioned" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/positioned" } } } },
+        { "if": { "properties": { "type": { "const": "image" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/image" } } } },
+        { "if": { "properties": { "type": { "const": "opacity" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/opacity" } } } },
+        { "if": { "properties": { "type": { "const": "rotate" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/rotate" } } } },
+        { "if": { "properties": { "type": { "const": "tap" } } }, "then": { "properties": { "data": { "$ref": "#/$defs/tap" } } } }
+      ]
+    },
+
+    "color": {
+      "description": "Hex sRGB: #RGB, #RRGGBB ou #AARRGGBB (alfa PRIMEIRO, como no Flutter — não é o #RRGGBBAA do CSS).",
+      "type": "string",
+      "pattern": "^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+    },
+    "length": {
+      "description": "Pixels lógicos (1 px do kanvas = 1 dp do Flutter), ou \"infinity\" para ocupar todo o espaço disponível.",
+      "oneOf": [{ "type": "number", "minimum": 0 }, { "const": "infinity" }]
+    },
+    "edge_insets": {
+      "description": "Número (todos os lados), [horizontal, vertical], [esquerda, topo, direita, base] ou objeto.",
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 2, "maxItems": 2 },
+        { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 4, "maxItems": 4 },
+        {
+          "type": "object",
+          "properties": {
+            "left": { "type": "number", "minimum": 0 },
+            "top": { "type": "number", "minimum": 0 },
+            "right": { "type": "number", "minimum": 0 },
+            "bottom": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "alignment": {
+      "oneOf": [
+        { "enum": ["topLeft", "topCenter", "topRight", "centerLeft", "center", "centerRight", "bottomLeft", "bottomCenter", "bottomRight"] },
+        {
+          "type": "object",
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "type": "number", "minimum": -1, "maximum": 1 },
+            "y": { "type": "number", "minimum": -1, "maximum": 1 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "action": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["push_named", "open_webview", "open_url", "pop", "custom"] },
+        "reference": { "type": "string" },
+        "label": { "type": "string" },
+        "data": { "type": "object" },
+        "event": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "metadata": { "type": "object" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "item_data": {
+      "description": "Preenchido pelo próprio sd_widget em listas; o kanvas não emite.",
+      "type": "object"
+    },
+    "children": { "type": "array", "items": { "$ref": "#/$defs/node" } },
+
+    "text": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string", "description": "Começando com $, é lido de item_data (listas)." },
+        "style": { "enum": ["headlineLarge", "headlineMedium", "headlineSmall", "titleLarge", "titleMedium", "titleSmall", "bodyLarge", "bodyMedium", "bodySmall", "labelLarge", "labelMedium", "labelSmall"] },
+        "color": { "$ref": "#/$defs/color" },
+        "fontSize": { "type": "number", "exclusiveMinimum": 0, "x-status": "planned" },
+        "fontWeight": { "enum": [100, 200, 300, 400, 500, 600, 700, 800, 900], "x-status": "planned" },
+        "fontFamily": { "type": "string", "x-status": "planned" },
+        "textAlign": { "enum": ["left", "center", "right", "justify", "start", "end"], "x-status": "planned" },
+        "height": { "type": "number", "exclusiveMinimum": 0, "description": "Altura da linha como múltiplo do tamanho (1.2 = 120%).", "x-status": "planned" },
+        "maxLines": { "type": "integer", "minimum": 1, "x-status": "planned" },
+        "overflow": { "enum": ["clip", "ellipsis", "fade", "visible"], "x-status": "planned" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "button": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string" },
+        "style": { "enum": ["elevated", "filled", "outline", "text"] },
+        "action": { "$ref": "#/$defs/action" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "svg": {
+      "type": "object",
+      "description": "img: SVG em texto ou data:image/svg+xml;base64,…; url: SVG remoto.",
+      "properties": {
+        "img": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "anyOf": [{ "required": ["img"] }, { "required": ["url"] }],
+      "additionalProperties": false
+    },
+    "padding": {
+      "type": "object",
+      "required": ["child"],
+      "properties": {
+        "padding": { "$ref": "#/$defs/edge_insets" },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "flex": {
+      "description": "column/row. Padrões do sd_widget: crossAxisAlignment center, mainAxisAlignment start, mainAxisSize min.",
+      "type": "object",
+      "properties": {
+        "children": { "$ref": "#/$defs/children" },
+        "crossAxisAlignment": { "enum": ["start", "center", "end", "stretch", "baseline"] },
+        "mainAxisAlignment": { "enum": ["start", "center", "end", "spaceBetween", "spaceAround", "spaceEvenly"] },
+        "mainAxisSize": { "enum": ["min", "max"] },
+        "verticalDirection": { "enum": ["down", "up"] },
+        "spacing": { "type": "number", "minimum": 0, "description": "Espaço entre filhos (gap do auto-layout).", "x-status": "planned" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "scroll": {
+      "type": "object",
+      "properties": {
+        "children": { "$ref": "#/$defs/children" },
+        "axis": { "enum": ["horizontal", "vertical"], "description": "Padrão: horizontal." },
+        "padding": { "$ref": "#/$defs/edge_insets" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "listview": {
+      "type": "object",
+      "properties": {
+        "children": { "$ref": "#/$defs/children" },
+        "axis": { "enum": ["horizontal", "vertical"] },
+        "height": { "type": "number", "minimum": 0 },
+        "fraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "separator": { "type": "number", "minimum": 0 },
+        "padding": { "$ref": "#/$defs/edge_insets" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "sized_box": {
+      "type": "object",
+      "properties": {
+        "width": { "$ref": "#/$defs/length" },
+        "height": { "$ref": "#/$defs/length" },
+        "child": { "$ref": "#/$defs/node", "x-status": "planned" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "decoration": {
+      "type": "object",
+      "properties": {
+        "color": { "$ref": "#/$defs/color" },
+        "radius": {
+          "description": "Raio único, ou [topo-esq, topo-dir, base-dir, base-esq] (planejado).",
+          "oneOf": [
+            { "type": "number", "minimum": 0 },
+            { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 4, "maxItems": 4, "x-status": "planned" }
+          ]
+        },
+        "borderColor": { "$ref": "#/$defs/color" },
+        "width": { "type": "number", "minimum": 0, "description": "Espessura da borda. Sem borderColor e sem width, não há borda (planejado: hoje o sd_widget sempre desenha uma borda preta de 1)." },
+        "shape": { "enum": ["rectangle", "circle"], "x-status": "planned" }
+      },
+      "additionalProperties": false
+    },
+    "container": {
+      "type": "object",
+      "properties": {
+        "width": { "$ref": "#/$defs/length" },
+        "height": { "$ref": "#/$defs/length" },
+        "padding": { "$ref": "#/$defs/edge_insets" },
+        "margin": { "$ref": "#/$defs/edge_insets" },
+        "color": { "$ref": "#/$defs/color", "description": "Ignorado quando há decoration (use decoration.color)." },
+        "decoration": { "$ref": "#/$defs/decoration" },
+        "alignment": { "$ref": "#/$defs/alignment" },
+        "clip": { "type": "boolean", "description": "Recorta o filho na forma da decoração (frame com 'recortar conteúdo').", "x-status": "planned" },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "expanded": {
+      "type": "object",
+      "required": ["child"],
+      "properties": {
+        "child": { "$ref": "#/$defs/node" },
+        "flex": { "type": "integer", "minimum": 1, "x-status": "planned" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "tile": {
+      "type": "object",
+      "required": ["img", "title", "subtitle"],
+      "properties": {
+        "img": { "type": "string", "pattern": "^data:image/svg\\+xml;base64," },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "height": { "type": "number", "minimum": 0 },
+        "width": { "type": "number", "minimum": 0 },
+        "margin": { "$ref": "#/$defs/edge_insets" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "list_tile": {
+      "type": "object",
+      "required": ["title", "subtitle", "trailing"],
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "trailing": { "type": "string" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "list_builder": {
+      "type": "object",
+      "required": ["id", "builder"],
+      "properties": {
+        "id": { "type": "string" },
+        "builder": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+
+    "stack": {
+      "x-status": "planned",
+      "description": "Frame sem auto-layout: filhos posicionados livremente (use positioned).",
+      "type": "object",
+      "properties": {
+        "children": { "$ref": "#/$defs/children" },
+        "width": { "$ref": "#/$defs/length" },
+        "height": { "$ref": "#/$defs/length" },
+        "alignment": { "$ref": "#/$defs/alignment" },
+        "clip": { "type": "boolean", "description": "Padrão: true (como o 'recortar conteúdo' do frame)." },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "positioned": {
+      "x-status": "planned",
+      "description": "Só dentro de stack. Dois lados de um eixo + tamanho ausente = estica.",
+      "type": "object",
+      "required": ["child"],
+      "properties": {
+        "left": { "type": "number" },
+        "top": { "type": "number" },
+        "right": { "type": "number" },
+        "bottom": { "type": "number" },
+        "width": { "type": "number", "minimum": 0 },
+        "height": { "type": "number", "minimum": 0 },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "image": {
+      "x-status": "planned",
+      "description": "Imagem raster (PNG/JPEG/GIF/WebP) por URL.",
+      "type": "object",
+      "required": ["url"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "width": { "$ref": "#/$defs/length" },
+        "height": { "$ref": "#/$defs/length" },
+        "fit": { "enum": ["contain", "cover", "fill", "fitWidth", "fitHeight", "none", "scaleDown"], "description": "Padrão: cover." },
+        "radius": { "type": "number", "minimum": 0 },
+        "semanticLabel": { "type": "string" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "opacity": {
+      "x-status": "planned",
+      "type": "object",
+      "required": ["opacity", "child"],
+      "properties": {
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "rotate": {
+      "x-status": "planned",
+      "description": "Gira o filho em torno do centro (ou de alignment). Positivo = horário, como no kanvas.",
+      "type": "object",
+      "required": ["angle", "child"],
+      "properties": {
+        "angle": { "type": "number", "description": "Graus." },
+        "alignment": { "$ref": "#/$defs/alignment" },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    },
+    "tap": {
+      "x-status": "planned",
+      "description": "Torna qualquer nó clicável sem mudar o visual (diferente de button, que usa o visual Material).",
+      "type": "object",
+      "required": ["action", "child"],
+      "properties": {
+        "action": { "$ref": "#/$defs/action" },
+        "child": { "$ref": "#/$defs/node" },
+        "item_data": { "$ref": "#/$defs/item_data" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

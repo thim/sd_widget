@@ -1,0 +1,25 @@
+{
+  "type": "row",
+  "data": {
+    "children": [
+      {
+        "type": "svg",
+        "data": {
+          "img": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"48\" height=\"48\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#3B6CFF\"/><path d=\"M7 12l3 3 7-7\" stroke=\"#FFFFFF\" stroke-width=\"2\" fill=\"none\"/></svg>"
+        }
+      },
+      {
+        "type": "sized_box",
+        "data": {
+          "width": 16
+        }
+      },
+      {
+        "type": "svg",
+        "data": {
+          "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4Ij48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgZmlsbD0iIzNCNkNGRiIvPjxwYXRoIGQ9Ik03IDEybDMgMyA3LTciIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+"
+        }
+      }
+    ]
+  }
+}

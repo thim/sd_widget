@@ -1,0 +1,114 @@
+{
+  "sdui": 1,
+  "meta": {
+    "source": "kanvas",
+    "name": "Tela inicial",
+    "warnings": []
+  },
+  "type": "container",
+  "data": {
+    "width": 360,
+    "height": 640,
+    "color": "#FFFFFF",
+    "padding": 24,
+    "child": {
+      "type": "column",
+      "data": {
+        "crossAxisAlignment": "stretch",
+        "mainAxisSize": "max",
+        "spacing": 16,
+        "children": [
+          {
+            "type": "text",
+            "data": {
+              "text": "Olá, kanvas",
+              "fontSize": 28,
+              "fontWeight": 700,
+              "color": "#111111",
+              "height": 1.2,
+              "fontFamily": "Inter"
+            }
+          },
+          {
+            "type": "text",
+            "data": {
+              "text": "Arraste, redimensione e edite. Mude o botão à esquerda e veja as instâncias se atualizarem.",
+              "fontSize": 15,
+              "fontWeight": 400,
+              "color": "#555555",
+              "height": 1.2
+            }
+          },
+          {
+            "type": "container",
+            "data": {
+              "height": 180,
+              "decoration": {
+                "color": "#EEF1FF",
+                "radius": 16
+              }
+            }
+          },
+          {
+            "type": "tap",
+            "data": {
+              "action": {
+                "type": "push_named",
+                "reference": "/home"
+              },
+              "child": {
+                "type": "container",
+                "data": {
+                  "height": 48,
+                  "alignment": "center",
+                  "decoration": {
+                    "color": "#3B6CFF",
+                    "radius": 0
+                  },
+                  "child": {
+                    "type": "text",
+                    "data": {
+                      "text": "Continuar",
+                      "fontSize": 16,
+                      "fontWeight": 600,
+                      "color": "#FFFFFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "tap",
+            "data": {
+              "action": {
+                "type": "custom",
+                "reference": "later"
+              },
+              "child": {
+                "type": "container",
+                "data": {
+                  "height": 48,
+                  "alignment": "center",
+                  "decoration": {
+                    "color": "#E9E9EE",
+                    "radius": 0
+                  },
+                  "child": {
+                    "type": "text",
+                    "data": {
+                      "text": "Mais tarde",
+                      "fontSize": 16,
+                      "fontWeight": 600,
+                      "color": "#222222"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

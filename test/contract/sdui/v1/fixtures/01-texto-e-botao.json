@@ -1,0 +1,69 @@
+{
+  "type": "column",
+  "data": {
+    "crossAxisAlignment": "start",
+    "children": [
+      {
+        "type": "text",
+        "data": {
+          "text": "Bem-vindo",
+          "style": "headlineLarge"
+        }
+      },
+      {
+        "type": "text",
+        "data": {
+          "text": "Texto de apoio em cinza.",
+          "style": "bodyMedium",
+          "color": "#666666"
+        }
+      },
+      {
+        "type": "row",
+        "data": {
+          "children": [
+            {
+              "type": "button",
+              "data": {
+                "text": "Continuar",
+                "style": "filled",
+                "action": {
+                  "type": "push_named",
+                  "reference": "/home"
+                }
+              }
+            },
+            {
+              "type": "button",
+              "data": {
+                "text": "Mais tarde",
+                "style": "outline",
+                "action": {
+                  "type": "custom",
+                  "reference": "later",
+                  "event": {
+                    "name": "cta_later",
+                    "metadata": {
+                      "screen": "welcome"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Termos de uso",
+          "style": "text",
+          "action": {
+            "type": "open_url",
+            "reference": "https://example.com/termos"
+          }
+        }
+      }
+    ]
+  }
+}

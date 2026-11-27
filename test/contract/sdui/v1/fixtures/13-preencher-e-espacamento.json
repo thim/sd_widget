@@ -1,0 +1,78 @@
+{
+  "sdui": 1,
+  "type": "container",
+  "data": {
+    "width": 360,
+    "padding": [
+      16,
+      12
+    ],
+    "child": {
+      "type": "column",
+      "data": {
+        "crossAxisAlignment": "start",
+        "spacing": 8,
+        "children": [
+          {
+            "type": "row",
+            "data": {
+              "mainAxisSize": "max",
+              "spacing": 8,
+              "children": [
+                {
+                  "type": "expanded",
+                  "data": {
+                    "flex": 2,
+                    "child": {
+                      "type": "container",
+                      "data": {
+                        "height": 40,
+                        "color": "#3B6CFF"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "expanded",
+                  "data": {
+                    "flex": 1,
+                    "child": {
+                      "type": "container",
+                      "data": {
+                        "height": 40,
+                        "color": "#8A3FFC"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "sized_box",
+            "data": {
+              "width": "infinity",
+              "child": {
+                "type": "container",
+                "data": {
+                  "height": 32,
+                  "color": "#E9E9EE"
+                }
+              }
+            }
+          },
+          {
+            "type": "text",
+            "data": {
+              "text": "Um texto longo que precisa caber em uma única linha e por isso termina com reticências no fim.",
+              "fontSize": 14,
+              "maxLines": 1,
+              "overflow": "ellipsis",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

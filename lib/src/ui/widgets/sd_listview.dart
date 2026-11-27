@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sd_widget/src/core/sd_registry.dart';
 import 'package:sd_widget/src/ui/sd_data_builder.dart';
 import 'package:sd_widget/src/ui/widgets/decoder.dart';
+import 'package:sd_widget/src/ui/widgets/parser.dart';
 
 class SDListView implements BaseJsonWidget {
   final Map args;
@@ -21,10 +22,10 @@ class SDListView implements BaseJsonWidget {
     final axis = decodeAxis(args["axis"]) ?? Axis.horizontal;
 
     return LayoutBuilder(builder: (context, constraints) {
-      final fraction = args["fraction"] ?? 0.9;
-      final separator = args["separator"] ?? 8.0;
+      final fraction = parseDouble(args["fraction"], 0.9)!;
+      final separator = parseDouble(args["separator"], 8.0)!;
       return SizedBox(
-        height: args["height"] ?? 150.0,
+        height: parseDouble(args["height"], 150.0),
         child: ListView.separated(
           scrollDirection: axis,
           itemCount: data.length,

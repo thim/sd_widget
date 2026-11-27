@@ -1,0 +1,39 @@
+{
+  "sdui": 1,
+  "type": "column",
+  "data": {
+    "crossAxisAlignment": "start",
+    "spacing": 12,
+    "children": [
+      {
+        "type": "image",
+        "data": {
+          "url": "https://example.com/foto.jpg",
+          "width": 320,
+          "height": 180,
+          "fit": "cover",
+          "radius": 12,
+          "semanticLabel": "Foto de capa"
+        }
+      },
+      {
+        "type": "container",
+        "data": {
+          "width": 64,
+          "height": 64,
+          "clip": true,
+          "decoration": {
+            "shape": "circle"
+          },
+          "child": {
+            "type": "image",
+            "data": {
+              "url": "https://example.com/avatar.png",
+              "fit": "cover"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

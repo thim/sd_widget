@@ -1,0 +1,151 @@
+{
+  "fixtures": [
+    {
+      "file": "01-texto-e-botao.json",
+      "requires": [],
+      "status": "current",
+      "title": "Texto e botões com ações",
+      "types": [
+        "button",
+        "column",
+        "row",
+        "text"
+      ]
+    },
+    {
+      "file": "02-layout.json",
+      "requires": [],
+      "status": "current",
+      "title": "Container, coluna, linha, espaços e alinhamento",
+      "types": [
+        "column",
+        "container",
+        "expanded",
+        "padding",
+        "row",
+        "sized_box",
+        "text"
+      ]
+    },
+    {
+      "file": "03-listas.json",
+      "requires": [],
+      "status": "current",
+      "title": "Lista horizontal e rolagem vertical",
+      "types": [
+        "column",
+        "container",
+        "list_tile",
+        "listview",
+        "scroll",
+        "text"
+      ]
+    },
+    {
+      "file": "04-svg.json",
+      "requires": [],
+      "status": "current",
+      "title": "SVG em texto e em base64",
+      "types": [
+        "row",
+        "sized_box",
+        "svg"
+      ]
+    },
+    {
+      "file": "05-tile-e-list-builder.json",
+      "requires": [],
+      "status": "current",
+      "title": "Tile e lista alimentada por dados",
+      "types": [
+        "column",
+        "container",
+        "list_builder",
+        "list_tile",
+        "tile"
+      ]
+    },
+    {
+      "file": "10-tela-demo.json",
+      "requires": [
+        "prop:column.spacing",
+        "prop:text.fontFamily",
+        "prop:text.fontSize",
+        "prop:text.fontWeight",
+        "prop:text.height",
+        "type:tap"
+      ],
+      "status": "planned",
+      "title": "Tela de exemplo do kanvas (auto-layout + toque)",
+      "types": [
+        "column",
+        "container",
+        "tap",
+        "text"
+      ]
+    },
+    {
+      "file": "11-posicao-livre.json",
+      "requires": [
+        "prop:decoration.radius[]",
+        "prop:decoration.shape",
+        "prop:text.fontSize",
+        "prop:text.fontWeight",
+        "type:opacity",
+        "type:positioned",
+        "type:rotate",
+        "type:stack"
+      ],
+      "status": "planned",
+      "title": "Posição livre: stack, rotação, opacidade, círculo",
+      "types": [
+        "container",
+        "opacity",
+        "positioned",
+        "rotate",
+        "stack",
+        "text"
+      ]
+    },
+    {
+      "file": "12-imagem.json",
+      "requires": [
+        "prop:column.spacing",
+        "prop:container.clip",
+        "prop:decoration.shape",
+        "type:image"
+      ],
+      "status": "planned",
+      "title": "Imagens raster e recorte circular",
+      "types": [
+        "column",
+        "container",
+        "image"
+      ]
+    },
+    {
+      "file": "13-preencher-e-espacamento.json",
+      "requires": [
+        "prop:column.spacing",
+        "prop:expanded.flex",
+        "prop:row.spacing",
+        "prop:sized_box.child",
+        "prop:text.fontSize",
+        "prop:text.maxLines",
+        "prop:text.overflow",
+        "prop:text.textAlign"
+      ],
+      "status": "planned",
+      "title": "Preencher, flex, espaçamento e texto com reticências",
+      "types": [
+        "column",
+        "container",
+        "expanded",
+        "row",
+        "sized_box",
+        "text"
+      ]
+    }
+  ],
+  "version": 1
+}
