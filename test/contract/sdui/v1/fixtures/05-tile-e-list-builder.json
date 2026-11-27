@@ -1,0 +1,37 @@
+{
+  "type": "column",
+  "data": {
+    "crossAxisAlignment": "stretch",
+    "children": [
+      {
+        "type": "tile",
+        "data": {
+          "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iNCIgZmlsbD0iIzhBM0ZGQyIvPjwvc3ZnPg==",
+          "title": "Cartão",
+          "subtitle": "Final 4417",
+          "height": 100
+        }
+      },
+      {
+        "type": "container",
+        "data": {
+          "height": 200,
+          "child": {
+            "type": "list_builder",
+            "data": {
+              "id": "pedidos",
+              "builder": {
+                "type": "list_tile",
+                "data": {
+                  "title": "$title",
+                  "subtitle": "$subtitle",
+                  "trailing": "$trailing"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

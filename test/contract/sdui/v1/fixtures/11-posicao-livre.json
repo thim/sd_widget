@@ -1,0 +1,117 @@
+{
+  "sdui": 1,
+  "type": "stack",
+  "data": {
+    "width": 360,
+    "height": 300,
+    "clip": true,
+    "children": [
+      {
+        "type": "positioned",
+        "data": {
+          "left": 0,
+          "top": 0,
+          "width": 360,
+          "height": 300,
+          "child": {
+            "type": "container",
+            "data": {
+              "color": "#1E1E22"
+            }
+          }
+        }
+      },
+      {
+        "type": "positioned",
+        "data": {
+          "left": 24,
+          "top": 24,
+          "width": 120,
+          "height": 80,
+          "child": {
+            "type": "container",
+            "data": {
+              "decoration": {
+                "color": "#3B6CFF",
+                "radius": [
+                  16,
+                  16,
+                  0,
+                  16
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "positioned",
+        "data": {
+          "left": 180,
+          "top": 40,
+          "width": 100,
+          "height": 100,
+          "child": {
+            "type": "container",
+            "data": {
+              "decoration": {
+                "color": "#8A3FFC",
+                "shape": "circle"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "positioned",
+        "data": {
+          "left": 40,
+          "top": 160,
+          "width": 200,
+          "height": 40,
+          "child": {
+            "type": "rotate",
+            "data": {
+              "angle": -8,
+              "child": {
+                "type": "text",
+                "data": {
+                  "text": "Girado",
+                  "fontSize": 24,
+                  "fontWeight": 800,
+                  "color": "#FFFFFF"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "positioned",
+        "data": {
+          "left": 220,
+          "top": 200,
+          "width": 100,
+          "height": 60,
+          "child": {
+            "type": "opacity",
+            "data": {
+              "opacity": 0.5,
+              "child": {
+                "type": "container",
+                "data": {
+                  "decoration": {
+                    "color": "#FFFFFF",
+                    "borderColor": "#3B6CFF",
+                    "width": 2,
+                    "radius": 8
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

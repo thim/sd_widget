@@ -261,6 +261,14 @@ registry.add('custom_widget', (args) => CustomWidget(args));
 }
 ```
 
+## 📐 Contrato com o kanvas
+
+O formato JSON aceito é descrito pelo contrato SDUI v1, mantido no [kanvas](https://github.com/thim/kanvas/tree/main/contracts/sdui/v1) e copiado em `test/contract/sdui/v1` (origem em `SOURCE`).
+
+- `flutter test test/contract_test.dart` renderiza cada exemplo do contrato.
+- Exemplos marcados como `planned` dependem de recursos ainda não implementados e ficam pulados.
+- Para atualizar a cópia: `tool/sync_contract.sh <ref-do-kanvas>`.
+
 ## 🎬 Action Types
 
 Handle various user interactions:
@@ -268,8 +276,8 @@ Handle various user interactions:
 | Action Type | Description | Example Reference |
 |-------------|-------------|-------------------|
 | `push_named` | Navigate to named route | `/profile` |
-| `push_webview` | Open web view | `https://example.com` |
-| `push_external` | Open external URL | `https://flutter.dev` |
+| `open_webview` | Open web view | `https://example.com` |
+| `open_url` | Open external URL | `https://flutter.dev` |
 | `pop` | Go back | `""` |
 | `custom` | Custom action | `show_dialog` |
 

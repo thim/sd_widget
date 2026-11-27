@@ -1,0 +1,96 @@
+{
+  "type": "column",
+  "data": {
+    "crossAxisAlignment": "stretch",
+    "children": [
+      {
+        "type": "listview",
+        "data": {
+          "axis": "horizontal",
+          "height": 100,
+          "fraction": 0.4,
+          "separator": 8,
+          "children": [
+            {
+              "type": "container",
+              "data": {
+                "color": "#FFE0B2",
+                "alignment": "center",
+                "child": {
+                  "type": "text",
+                  "data": {
+                    "text": "Um"
+                  }
+                }
+              }
+            },
+            {
+              "type": "container",
+              "data": {
+                "color": "#C8E6C9",
+                "alignment": "center",
+                "child": {
+                  "type": "text",
+                  "data": {
+                    "text": "Dois"
+                  }
+                }
+              }
+            },
+            {
+              "type": "container",
+              "data": {
+                "color": "#BBDEFB",
+                "alignment": "center",
+                "child": {
+                  "type": "text",
+                  "data": {
+                    "text": "Três"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "data": {
+          "height": 220,
+          "child": {
+            "type": "scroll",
+            "data": {
+              "axis": "vertical",
+              "children": [
+                {
+                  "type": "list_tile",
+                  "data": {
+                    "title": "Pedido #1042",
+                    "subtitle": "Entregue",
+                    "trailing": "R$ 89,90"
+                  }
+                },
+                {
+                  "type": "list_tile",
+                  "data": {
+                    "title": "Pedido #1041",
+                    "subtitle": "A caminho",
+                    "trailing": "R$ 42,00"
+                  }
+                },
+                {
+                  "type": "list_tile",
+                  "data": {
+                    "title": "Pedido #1040",
+                    "subtitle": "Cancelado",
+                    "trailing": "R$ 0,00"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

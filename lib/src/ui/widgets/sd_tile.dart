@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:sd_widget/src/ui/sd_data_builder.dart';
 import 'package:sd_widget/src/ui/widgets/decoder.dart';
+import 'package:sd_widget/src/ui/widgets/parser.dart';
 
 const Color grey50 = Color(0xFFF2F2F2);
 const Color grey500 = Color(0xFF717171);
@@ -21,8 +22,8 @@ class SDTile implements BaseJsonWidget {
     final svg = base64Decode(image.replaceAll(_base64Image, ""));
 
     return Container(
-      height: args['height'] ?? 100.0,
-      width: args['width'],
+      height: parseDouble(args['height'], 100.0),
+      width: parseDouble(args['width']),
       margin: decodeEdgeInsetsGeometry(args["margin"]),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),

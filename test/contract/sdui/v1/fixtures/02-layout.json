@@ -1,0 +1,97 @@
+{
+  "type": "container",
+  "data": {
+    "width": 320,
+    "height": 400,
+    "padding": 16,
+    "decoration": {
+      "color": "#F4F5F8",
+      "radius": 12,
+      "borderColor": "#DDDDDD",
+      "width": 1
+    },
+    "child": {
+      "type": "column",
+      "data": {
+        "crossAxisAlignment": "stretch",
+        "mainAxisSize": "max",
+        "children": [
+          {
+            "type": "padding",
+            "data": {
+              "padding": [
+                0,
+                8
+              ],
+              "child": {
+                "type": "text",
+                "data": {
+                  "text": "Resumo",
+                  "style": "titleLarge"
+                }
+              }
+            }
+          },
+          {
+            "type": "row",
+            "data": {
+              "children": [
+                {
+                  "type": "expanded",
+                  "data": {
+                    "child": {
+                      "type": "container",
+                      "data": {
+                        "height": 40,
+                        "color": "#3B6CFF"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "sized_box",
+                  "data": {
+                    "width": 8
+                  }
+                },
+                {
+                  "type": "expanded",
+                  "data": {
+                    "child": {
+                      "type": "container",
+                      "data": {
+                        "height": 40,
+                        "color": "#8A3FFC"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "sized_box",
+            "data": {
+              "height": 16
+            }
+          },
+          {
+            "type": "container",
+            "data": {
+              "height": 60,
+              "alignment": "center",
+              "color": "#FFFFFF",
+              "child": {
+                "type": "text",
+                "data": {
+                  "text": "Centralizado",
+                  "style": "bodyLarge"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
