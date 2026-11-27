@@ -282,6 +282,45 @@ Também do contrato v1:
 - `container`: `clip`. `decoration`: `shape: circle`, `radius` por canto `[te, td, bd, be]`.
 - **Mudança:** `decoration` só desenha borda quando há `borderColor` ou `width` (antes era sempre preta de 1 px).
 
+## 💾 Cache de layout
+
+`SDLayoutRepository` guarda as telas em memória (LRU) e num armazenamento persistente que você
+escolhe. A tela abre na hora com o que está em cache e é revalidada em segundo plano com ETag
+quando passa de `maxAge`. Sem rede, fica no último layout bom. JSON inválido ou de uma versão
+do contrato que o app não conhece nunca substitui o layout que funciona.
+
+```dart
+final prefs = await SharedPreferences.getInstance();
+final layouts = SDLayoutRepository(
+  store: KeyValueLayoutStore(
+    read: (k) async => prefs.getString(k),
+    write: (k, v) => prefs.setString(k, v),
+    remove: (k) => prefs.remove(k),
+  ),
+  fetch: (key, {etag}) async {
+    final res = await http.get(Uri.parse('$base/$key'),
+        headers: {if (etag != null) 'If-None-Match': etag});
+    if (res.statusCode == 304) return const SDLayoutNotModified();
+    if (res.statusCode != 200) throw HttpException('${res.statusCode}');
+    return SDLayoutFetched(res.body, etag: res.headers['etag']);
+  },
+);
+
+SDLayoutView(
+  repository: layouts,
+  layoutKey: 'home',
+  registry: defaultWidget(),
+  placeholder: (_) => const Center(child: CircularProgressIndicator()),
+  errorBuilder: (_, error, retry) => TextButton(onPressed: retry, child: const Text('Tentar de novo')),
+);
+```
+
+- `SDLayoutView` analisa o JSON uma vez por versão do layout; rebuilds do pai não reprocessam.
+- `layouts.prefetch(['perfil', 'extrato'])` baixa as próximas telas em segundo plano.
+- `layouts.invalidate('home')` apaga a tela dos dois caches.
+
+O próximo passo — separar o dado do layout — está em [`doc/plano-dados-e-layout.md`](doc/plano-dados-e-layout.md).
+
 ## 🎬 Action Types
 
 Handle various user interactions:
