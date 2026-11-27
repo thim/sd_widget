@@ -13,3 +13,6 @@ export 'sd_svg.dart';
 export 'sd_text.dart';
 export 'sd_tile.dart';
 export 'decoder.dart';
+export 'sd_effects.dart';
+export 'sd_image.dart';
+export 'sd_stack.dart';

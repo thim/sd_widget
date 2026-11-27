@@ -40,20 +40,15 @@ sd_widget ignora chaves além de `type`/`data`, então isso não quebra nada.
 
 ## Status dos recursos
 
-`"x-status": "planned"` no schema marca o que o sd_widget **ainda não** suporta (entra na
-fase 1). Ao implementar um recurso no sd_widget, remova a marca aqui, regenere o manifesto
-e o exemplo correspondente passa a rodar nos testes do sd_widget automaticamente.
+Todo o v1 é suportado pelo sd_widget (fase 1). Os exemplos têm status `current` e rodam
+nos testes do sd_widget.
 
-| Já existe no sd_widget | Planejado (fase 1) |
-|---|---|
-| `text` (`text`, `style`, `color`) | `text`: `fontSize`, `fontWeight`, `fontFamily`, `textAlign`, `height`, `maxLines`, `overflow` |
-| `button`, `svg`, `padding`, `sized_box`, `expanded` | `sized_box.child`, `expanded.flex` |
-| `column`, `row` | `spacing` (gap do auto-layout) |
-| `container` + `decoration` (`color`, `radius`, `borderColor`, `width`) | `container.clip`; `decoration.shape: circle`; `radius` por canto `[te, td, bd, be]`; **borda só quando pedida** |
-| `scroll`, `listview`, `tile`, `list_tile`, `list_builder` | novos tipos: `stack`, `positioned`, `image`, `opacity`, `rotate`, `tap` |
+`"x-status": "planned"` continua disponível para recursos novos: marque no schema o que o
+sd_widget **ainda não** suporta. O exemplo que usa o recurso fica `planned` no manifesto e
+pulado nos testes do sd_widget; ao implementar, remova a marca e regenere o manifesto.
 
-Mudança de comportamento planejada: hoje `decoration` **sempre** desenha uma borda preta
-de 1 px. No v1, sem `borderColor` e sem `width` não há borda.
+Comportamento de `decoration`: sem `borderColor` e sem `width` não há borda (antes da
+fase 1 o sd_widget sempre desenhava uma borda preta de 1 px).
 
 ## Como o kanvas vai mapear (fase 2)
 

@@ -41,11 +41,17 @@ void _registerWidgets(Map<String, RegistryBuilder> builders, JsonViewRegistry re
     'row': (Map args) => SDRow(args, registry),
     'scroll': (Map args) => SDScroll(args, registry),
     'listview': (Map args) => SDListView(args, registry),
-    'sized_box': (Map args) => SDSizedBox(args),
+    'sized_box': (Map args) => SDSizedBox(args, registry),
     'container': (Map args) => SDContainer(args, registry),
     'expanded': (Map args) => SDExpanded(args, registry),
     'tile': (Map args) => SDTile(args),
     'list_tile': (Map args) => SDListTile(args),
     'list_builder': (Map args) => SDListBuilder(args, registry.listDataBuilder, registry),
+    'stack': (Map args) => SDStack(args, registry),
+    'positioned': (Map args) => SDPositioned(args, registry),
+    'image': (Map args) => SDImage(args),
+    'opacity': (Map args) => SDOpacity(args, registry),
+    'rotate': (Map args) => SDRotate(args, registry),
+    'tap': (Map args) => SDTap(args, registry),
   });
 }

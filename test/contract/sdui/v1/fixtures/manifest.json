@@ -67,15 +67,8 @@
     },
     {
       "file": "10-tela-demo.json",
-      "requires": [
-        "prop:column.spacing",
-        "prop:text.fontFamily",
-        "prop:text.fontSize",
-        "prop:text.fontWeight",
-        "prop:text.height",
-        "type:tap"
-      ],
-      "status": "planned",
+      "requires": [],
+      "status": "current",
       "title": "Tela de exemplo do kanvas (auto-layout + toque)",
       "types": [
         "column",
@@ -86,17 +79,8 @@
     },
     {
       "file": "11-posicao-livre.json",
-      "requires": [
-        "prop:decoration.radius[]",
-        "prop:decoration.shape",
-        "prop:text.fontSize",
-        "prop:text.fontWeight",
-        "type:opacity",
-        "type:positioned",
-        "type:rotate",
-        "type:stack"
-      ],
-      "status": "planned",
+      "requires": [],
+      "status": "current",
       "title": "Posição livre: stack, rotação, opacidade, círculo",
       "types": [
         "container",
@@ -109,13 +93,8 @@
     },
     {
       "file": "12-imagem.json",
-      "requires": [
-        "prop:column.spacing",
-        "prop:container.clip",
-        "prop:decoration.shape",
-        "type:image"
-      ],
-      "status": "planned",
+      "requires": [],
+      "status": "current",
       "title": "Imagens raster e recorte circular",
       "types": [
         "column",
@@ -125,17 +104,8 @@
     },
     {
       "file": "13-preencher-e-espacamento.json",
-      "requires": [
-        "prop:column.spacing",
-        "prop:expanded.flex",
-        "prop:row.spacing",
-        "prop:sized_box.child",
-        "prop:text.fontSize",
-        "prop:text.maxLines",
-        "prop:text.overflow",
-        "prop:text.textAlign"
-      ],
-      "status": "planned",
+      "requires": [],
+      "status": "current",
       "title": "Preencher, flex, espaçamento e texto com reticências",
       "types": [
         "column",
